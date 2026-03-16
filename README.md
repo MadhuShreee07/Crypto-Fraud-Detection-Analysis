@@ -269,3 +269,39 @@ LIMIT 10;
 * High-value transaction regions may require additional monitoring.
 
 Git and GitHub were used for version control and project sharing. The repository documents the SQL queries, dataset structure, visualizations, and insights derived from the analysis.
+
+## What I Learned
+
+Through this project, I strengthened several important data analysis skills:
+
+**SQL Query Development**
+
+I improved my ability to write analytical SQL queries to explore transaction data and detect fraud patterns. This project helped me practice structuring more advanced queries to filter, aggregate, and analyze financial transaction datasets.
+
+**Exploratory Data Analysis**
+
+By performing EDA on the dataset, I learned how to examine transaction distributions, identify unusual values, and understand how fraud activity varies across different locations.
+
+**Data Visualization**
+
+Creating charts from SQL query results helped me present insights more effectively and highlight important patterns such as fraud distribution and transaction activity across regions.
+
+---
+
+## Conclusions
+
+### Insights
+
+Several key insights emerged from this analysis:
+
+* **China and Indonesia recorded the highest number of cryptocurrency transactions.**
+* **Indonesia had the highest number of fraud-flagged transactions.**
+* Approximately **10.8% of all transactions were flagged as potential fraud.**
+* Fraud activity is concentrated in certain regions rather than evenly distributed across locations.
+* Some regions show **higher average transaction values**, which may indicate higher-value transfers.
+
+### Closing Thoughts
+
+This project demonstrates how SQL can be used to explore blockchain transaction data and identify potential fraud patterns. By combining SQL analysis with visualization, it becomes easier to uncover trends and highlight suspicious activity across regions.
+
+The project also highlights the importance of data analysis techniques in monitoring financial transactions and supporting fraud detection systems.
