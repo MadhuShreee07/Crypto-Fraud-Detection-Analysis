@@ -1,5 +1,7 @@
 # Crypto Fraud Detection Analysis 
 
+SQL-based analysis of cryptocurrency transaction data to identify suspicious patterns and fraud activity.
+
 ## Introduction
 
 🔍 Explore cryptocurrency transaction data to uncover potential fraud patterns.
@@ -48,7 +50,8 @@ Used to create visualizations from SQL query results.
 **Exploratory Data Analysis (EDA)**  
 Used to explore the dataset and identify patterns before performing deeper analysis.
 
-**Git & GitHub**  
+**Git & GitHub**   
+Used for version control and project sharing. The repository documents the SQL queries, dataset structure, visualizations, and insights derived from the analysis.
 
 ## The Analysis
 
@@ -271,8 +274,6 @@ LIMIT 10;
 Git and GitHub were used for version control and project sharing. The repository documents the SQL queries, dataset structure, visualizations, and insights derived from the analysis.
 
 ## What I Learned
-
-Through this project, I strengthened several important data analysis skills:
 
 **SQL Query Development**
 
