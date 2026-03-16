@@ -34,24 +34,20 @@ The questions I wanted to answer through my SQL analysis were:
 
 ## Tools I Used
 
-For this cryptocurrency fraud detection project, I used several tools to explore the dataset, analyze transaction patterns, and present insights.
+For this cryptocurrency fraud analysis project, I used the following tools:
 
-**SQL**
+**SQL**  
+The main tool used to query and analyze the transaction dataset.
 
-SQL served as the core tool for analyzing the cryptocurrency transaction dataset. It allowed me to filter, aggregate, and investigate patterns related to transaction amounts, fraud flags, and location-based activity.
+**MySQL**  
+Used to store the dataset and execute SQL queries efficiently.
 
-**MySQL**
+**Excel**  
+Used to create visualizations from SQL query results.
 
-MySQL was used as the database management system to store the dataset and execute SQL queries efficiently.
+**Exploratory Data Analysis (EDA)**  
+Used to explore the dataset and identify patterns before performing deeper analysis.
 
-**Exploratory Data Analysis (EDA)**
-
-EDA techniques were used to understand the structure of the dataset and identify important patterns before performing deeper analysis. This included examining transaction distributions, identifying unusual transaction values, and understanding how fraud activity varies across different locations.
-
-**Excel**
-
-Excel was used to visualize the results of SQL queries through charts and graphs. These visualizations helped highlight patterns such as fraud distribution, transaction activity by location, fraud rates, and average transaction values.
-
-**Git & GitHub**
-
+**Git & GitHub**  
+Used for version control and to share the project publicly.
 Git and GitHub were used for version control and project sharing. The repository documents the SQL queries, dataset structure, visualizations, and insights derived from the analysis.
