@@ -2,18 +2,16 @@
 
 ## Introduction
 
-🔍 Explore cryptocurrency transaction data to uncover potential fraud patterns!
+🔍 Explore cryptocurrency transaction data to uncover potential fraud patterns.
 
-This project analyzes blockchain transaction activity using **SQL queries and data visualization** to identify suspicious behavior across different locations.
+This project analyzes blockchain transaction activity using **SQL and data visualization** to identify suspicious behavior across different locations.
 
 The analysis focuses on:
 
 - 🚩 detecting fraud-flagged transactions  
 - 🌍 identifying locations with high fraud activity  
-- 📊 understanding the distribution of fraud vs non-fraud transactions  
+- 📊 understanding fraud distribution  
 - 💰 analyzing transaction values across regions  
-
-By combining **SQL analysis with visualizations**, the project demonstrates how data analysis techniques can be applied to detect fraud patterns in cryptocurrency transactions.
 
 🔎 SQL queries used in this analysis can be found in the **SQL folder** of this repository.
 
