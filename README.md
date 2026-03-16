@@ -17,23 +17,20 @@ The analysis focuses on:
 
 ## Background
 
-With the rapid growth of cryptocurrency usage worldwide, the number of blockchain transactions has increased significantly. While most transactions are legitimate, some may indicate fraudulent or suspicious activity.
+With the rapid growth of cryptocurrency usage, blockchain networks process large numbers of financial transactions every day. While most of these transactions are legitimate, some may indicate suspicious or fraudulent activity.
 
-This project was created to explore how **SQL can be used to analyze transaction data and detect fraud patterns**.
-
-The dataset contains **1000 cryptocurrency transactions** including wallet addresses, transaction amounts, locations, and fraud flags.
-
-Through SQL queries and data exploration, this project aims to answer several key questions about transaction behavior and fraud patterns.
+This project explores a dataset of **1000 cryptocurrency transactions** to analyze transaction behavior and identify potential fraud patterns using SQL.
 
 The questions I wanted to answer through my SQL analysis were:
 
 1. Which transactions involve unusually **high transfer amounts**?
-2. Which wallets are sending **too many transactions** (possible spam activity)?
+2. Which wallets are sending **too many transactions**?
 3. Which locations report the **highest number of fraud transactions**?
 4. Which transactions have **unusually high gas fees**?
-5. What **percentage of all transactions are fraudulent**?
-6. Which wallets receive **the most transactions**?
+5. What **percentage of transactions are fraudulent**?
+6. Which wallets receive the **most transactions**?
 7. Which locations have the **highest fraud rates**?
+
 
 ## Tools I Used
 
