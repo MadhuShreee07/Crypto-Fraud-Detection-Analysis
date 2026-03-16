@@ -52,16 +52,16 @@ Used to explore the dataset and identify patterns before performing deeper analy
 
 ## The Analysis
 
-Each query in this project investigates a specific aspect of cryptocurrency transaction behavior and potential fraud patterns.
+Each query in this project investigates different aspects of cryptocurrency transaction behavior and potential fraud patterns.
 
 ---
 
 ### 1. High-Value Suspicious Transactions
 
-To detect potentially suspicious activity, I filtered transactions with unusually large transfer amounts. Large transfers can indicate high-risk activity that may require further monitoring.
+To detect potentially suspicious activity, I filtered transactions with unusually large transfer amounts.
 
 ```sql
-SELECT 
+SELECT
 Transaction_id,
 Wallet_From,
 Wallet_To,
@@ -72,42 +72,63 @@ WHERE Amount > 150
 ORDER BY Amount DESC;
 ```
 
-Key observations:
+| Transaction_id | Wallet_From | Wallet_To | Amount | Location  |
+| -------------- | ----------- | --------- | ------ | --------- |
+| 962            | 0x6AE8C9    | 0x89B35E  | 199.90 | Greece    |
+| 552            | 0x96B7E2    | 0xEE630E  | 199.73 | China     |
+| 233            | 0xFA94F1    | 0xD18AD3  | 199.72 | China     |
+| 381            | 0xEE446A    | 0xFA5639  | 199.53 | Paraguay  |
+| 727            | 0xAD9FE3    | 0xCB74A8  | 199.48 | Indonesia |
 
-* Several transactions exceed **150 units**, indicating unusually large transfers.
-* These high-value transactions appear across multiple locations.
-* Large transfers may represent suspicious activity in financial monitoring systems.
+**Insights**
+
+* Multiple transactions exceed **150 units**, indicating unusually large transfers.
+* High-value transactions may represent suspicious financial activity.
 
 ---
 
-### 2. Wallets Sending Too Many Transactions
+### 2. Total Transactions by Location
 
-Next, I analyzed wallet activity to identify wallets that send an unusually high number of transactions. High transaction frequency can indicate automated behavior or suspicious wallet activity.
+This query identifies regions with the highest cryptocurrency transaction activity.
 
 ```sql
-SELECT 
-Wallet_From,
+SELECT
+Location,
 COUNT(*) AS Total_Transactions
 FROM crypto_transactions
-GROUP BY Wallet_From
+GROUP BY Location
 ORDER BY Total_Transactions DESC
 LIMIT 10;
 ```
 
-Key observations:
+| Location       | Total_Transactions |
+| -------------- | ------------------ |
+| China          | 184                |
+| Indonesia      | 111                |
+| Russia         | 58                 |
+| Philippines    | 54                 |
+| Brazil         | 44                 |
+| Portugal       | 35                 |
+| Poland         | 29                 |
+| France         | 25                 |
+| United States  | 25                 |
+| Czech Republic | 25                 |
 
-* Some wallets appear repeatedly as senders in the dataset.
-* High-frequency wallets may represent automated systems, exchanges, or suspicious accounts.
-* Monitoring wallet behavior helps identify abnormal transaction patterns.
+<img src="Images/transactions_by_location.png" width="600">
+
+**Insights**
+
+* **China recorded the highest number of transactions.**
+* **Indonesia and Russia** also show significant transaction activity.
 
 ---
 
 ### 3. Fraud Transactions by Location
 
-To identify where fraud occurs most frequently, I filtered transactions flagged as fraudulent and grouped them by location.
+This analysis identifies where fraud occurs most frequently.
 
 ```sql
-SELECT 
+SELECT
 Location,
 COUNT(*) AS Fraud_Count
 FROM crypto_transactions
@@ -116,22 +137,34 @@ GROUP BY Location
 ORDER BY Fraud_Count DESC;
 ```
 
-Key observations:
+| Location    | Fraud_Count |
+| ----------- | ----------- |
+| Indonesia   | 19          |
+| China       | 11          |
+| Russia      | 10          |
+| Brazil      | 8           |
+| Poland      | 8           |
+| Portugal    | 7           |
+| Mexico      | 5           |
+| Philippines | 4           |
+| Malaysia    | 3           |
+| Vietnam     | 3           |
 
-* **Indonesia recorded the highest number of fraud-flagged transactions.**
-* **China and Russia** also show notable fraud activity.
-* Fraud cases appear concentrated in certain regions.
+<img src="Images/fraud_transactions_by_location.png" width="600">
 
-![Fraud Transactions by Location](Images/fraud_transactions_by_location.png)
+**Insights**
+
+* **Indonesia has the highest number of fraud-flagged transactions.**
+* Fraud activity appears concentrated in a few regions.
 
 ---
 
-### 4. High Gas Fee Transactions
+### 4. Highest Gas Fee Transactions
 
-Gas fees represent the processing cost for blockchain transactions. Unusually high gas fees can indicate priority manipulation or unusual transaction behavior.
+Gas fees represent the processing cost for blockchain transactions. Extremely high gas fees may indicate unusual activity.
 
 ```sql
-SELECT 
+SELECT
 Transaction_id,
 Wallet_From,
 Wallet_To,
@@ -143,20 +176,27 @@ ORDER BY Gas_Fee DESC
 LIMIT 10;
 ```
 
-Key observations:
+| Transaction_id | Wallet_From | Wallet_To | Gas_Fee  | Amount | Location      |
+| -------------- | ----------- | --------- | -------- | ------ | ------------- |
+| 373            | 0xC2D4CB    | 0x740DDA  | 0.002000 | 173.59 | China         |
+| 887            | 0xB1A025    | 0x8AEA59  | 0.001994 | 158.04 | United States |
+| 999            | 0xD2821C    | 0xBE22E6  | 0.001992 | 123.59 | Colombia      |
+| 562            | 0xC7D7EF    | 0x78CF2C  | 0.001990 | 154.00 | Canada        |
+| 404            | 0xBB6702    | 0xE7EE4E  | 0.001988 | 137.64 | Uganda        |
+
+**Insights**
 
 * Some transactions show **unusually high gas fees**.
-* High fees may indicate urgent processing or abnormal activity.
-* Monitoring gas fee spikes can help detect suspicious transactions.
+* Monitoring gas fee spikes may help identify abnormal activity.
 
 ---
 
 ### 5. Overall Fraud Percentage
 
-To understand how common fraud is in the dataset, I calculated the percentage of transactions flagged as fraudulent.
+This query calculates the percentage of transactions flagged as fraudulent.
 
 ```sql
-SELECT 
+SELECT
 COUNT(*) AS Total_Transactions,
 SUM(CASE WHEN Flagged='TRUE' THEN 1 ELSE 0 END) AS Fraud_Transactions,
 ROUND(
@@ -166,46 +206,25 @@ SUM(CASE WHEN Flagged='TRUE' THEN 1 ELSE 0 END) * 100 / COUNT(*),
 FROM crypto_transactions;
 ```
 
-Key observations:
+| Total_Transactions | Fraud_Transactions | Fraud_Percentage |
+| ------------------ | ------------------ | ---------------- |
+| 1000               | 108                | 10.8             |
 
-* Approximately **10.8% of transactions were flagged as potential fraud**.
-* The majority of transactions appear legitimate.
-* Even a small fraud percentage can represent significant financial risk.
+<img src="Images/fraud_distribution.png" width="600">
 
-![Fraud Distribution](Images/fraud_distribution.png)
+**Insights**
 
----
-
-### 6. Transactions by Location
-
-To understand where cryptocurrency activity is most concentrated, I counted the number of transactions across different locations.
-
-```sql
-SELECT 
-Location,
-COUNT(*) AS Total_Transactions
-FROM crypto_transactions
-GROUP BY Location
-ORDER BY Total_Transactions DESC
-LIMIT 10;
-```
-
-Key observations:
-
-* **China recorded the highest number of transactions.**
-* **Indonesia and Russia** also show high transaction activity.
-* Cryptocurrency usage appears concentrated in certain regions.
-
-![Transactions by Location](Images/transactions_by_location.png)
+* Approximately **10.8% of transactions were flagged as fraudulent**.
+* Even small fraud percentages can represent significant financial risk.
 
 ---
 
-### 7. Fraud Rate by Location
+### 6. Fraud Rate by Location
 
-Finally, I calculated the fraud rate for each location to identify regions where fraud is proportionally higher relative to the total number of transactions.
+This query measures fraud intensity relative to the total number of transactions in each location.
 
 ```sql
-SELECT 
+SELECT
 Location,
 COUNT(*) AS Total_Transactions,
 SUM(CASE WHEN Flagged='TRUE' THEN 1 ELSE 0 END) AS Fraud_Count,
@@ -215,16 +234,38 @@ SUM(CASE WHEN Flagged='TRUE' THEN 1 ELSE 0 END) * 100 / COUNT(*),
 ) AS Fraud_Rate_Percent
 FROM crypto_transactions
 GROUP BY Location
-ORDER BY Fraud_Rate_Percent DESC;
+ORDER BY Fraud_Rate_Percent DESC
+LIMIT 10;
 ```
 
-Key observations:
+<img src="Images/fraud_rate_by_location.png" width="600">
 
-* Some locations show **higher fraud rates compared to others**.
-* Fraud risk varies significantly across regions.
-* Identifying high-risk locations can help improve fraud detection systems.
+**Insights**
 
-![Fraud Rate by Location](Images/fraud_rate_by_location.png)
+* Fraud risk varies significantly between locations.
+* Some regions show **higher fraud rates relative to transaction volume**.
 
-Used for version control and to share the project publicly.
+---
+
+### 7. Average Transaction Amount by Location
+
+Finally, I analyzed the average transaction value across locations.
+
+```sql
+SELECT
+Location,
+ROUND(AVG(Amount),2) AS Avg_Transaction_Amount
+FROM crypto_transactions
+GROUP BY Location
+ORDER BY Avg_Transaction_Amount DESC
+LIMIT 10;
+```
+
+<img src="Images/avg_transaction_amount_by_location.png" width="600">
+
+**Insights**
+
+* Some locations show **higher average transaction values**.
+* High-value transaction regions may require additional monitoring.
+
 Git and GitHub were used for version control and project sharing. The repository documents the SQL queries, dataset structure, visualizations, and insights derived from the analysis.
