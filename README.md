@@ -1,3 +1,5 @@
+# Crypto Fraud Detection Analysis 
+
 ## Introduction
 
 🔍 Explore cryptocurrency transaction data to uncover potential fraud patterns!
